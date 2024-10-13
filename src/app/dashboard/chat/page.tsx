@@ -1,4 +1,5 @@
 "use client"; 
+
 import React, { useState } from 'react';
 const Chat: React.FC = () => {
     const [messages, setMessages] = useState<{ user: string; text: string }[]>([]);
