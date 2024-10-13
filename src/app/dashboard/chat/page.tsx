@@ -139,21 +139,18 @@
 
 import React, { useState } from 'react';
 
-const Chat: React.FC = () => {
+// Function component definition using function declaration
+function Chat(): JSX.Element {
     const [messages, setMessages] = useState<{ user: string; text: string }[]>([]);
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const addMessage = (user: string, text: string) => {
-        setMessages((prev) => [...prev, { user, text }]);
-    };
-
     const handleSend = async () => {
         if (input.trim()) {
-            addMessage('You', input);
+            setMessages([...messages, { user: 'You', text: input }]);
             setInput('');
             setLoading(true);
-
+    
             try {
                 const encodedQuery = encodeURIComponent(input);
                 const response = await fetch(`http://127.0.0.1:8000/ai/get_insights/?query=${encodedQuery}`, {
@@ -162,20 +159,25 @@ const Chat: React.FC = () => {
                         'Content-Type': 'application/json',
                     },
                 });
-
+    
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-
+    
                 const data = await response.json();
                 const relatedProduct = data.related_products[0]; 
                 const answer = relatedProduct?.answer || 'No answer';
 
-                addMessage('Answer', answer);
-
+                setMessages((prev) => [
+                    ...prev,
+                    { user: 'Answer', text: `: ${answer}` },
+                ]);
             } catch (error) {
                 console.error('Error fetching AI response:', error);
-                addMessage('AI', 'Sorry, something went wrong.');
+                setMessages((prev) => [
+                    ...prev,
+                    { user: 'AI', text: 'Sorry, something went wrong.' },
+                ]);
             } finally {
                 setLoading(false);
             }
@@ -209,7 +211,7 @@ const Chat: React.FC = () => {
             </div>
         </div>
     );
-};
+}
 
 const styles: { [key: string]: React.CSSProperties } = {
     container: {
