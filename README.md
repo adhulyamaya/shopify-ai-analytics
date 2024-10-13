@@ -1,6 +1,3 @@
-shopify-ai-analytics-frontend
-
-
 Chat Application with AI Assistant
 This is a chat application that integrates an AI Assistant to provide responses to user queries. The frontend is built with React, and it interacts with a backend API to fetch AI-generated insights based on user input.
 
