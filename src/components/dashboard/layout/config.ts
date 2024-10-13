@@ -1,4 +1,4 @@
-import type { NavItemConfig } from '@/types/nav';
+import type { NavItemConfig } from '@/types/nav.ts';
 
 import { paths } from '@/paths';
 
