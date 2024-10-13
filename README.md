@@ -1,12 +1,12 @@
-#Chat Application with AI Assistant and Data Visualization
+# Chat Application with AI Assistant and Data Visualization
 ________________________________________________________________________
 
-#Overview
+# Overview
 ________________________________________________________________________
 
 Shopify AI Analytics is an AI-powered e-commerce dashboard that integrates Shopify, Pinecone, and Hugging Face models to provide real-time insights and question-answering for Shopify store data. The frontend of this project is designed to visualize data through interactive graphs and pie charts, allowing users to gain insights from their Shopify store data easily
 
-#Features
+# Features
 ______________________________________________________________________
 
 User-initiated Chat: Users can send text messages, and the AI responds with relevant insights.
@@ -14,7 +14,7 @@ AI Integration: Fetches answers using an AI API (e.g., from a Django backend) ba
 Data Visualization: Displays real-time graphs and pie charts based on live data.
 Loading Indicator: Displays when the AI is processing a response or data is loading.
 
-#Tech Stack
+# Tech Stack
 _______________________________________________________________________
 Frontend
 React: For building the user interface.
@@ -25,6 +25,25 @@ Backend
 Django : backend API used for fetching AI insights and live data.(https://github.com/aminakm123/shopify-ai-analytics)
 Fetch API: Used to make API requests to the backend.
 
+#### 1. Clone the Repository
+
+```bash
+   [git clone https://github.com/aminakm123/shopify-ai-analytics.git](https://github.com/adhulyamaya/shopify-ai-analytics.git)
+   cd shopify-ai-analytics
+  ```
+#### 2. Install Dependencies
+   
+```bash
+npm install
+ ```
+#### 3.Run the Application
+```bash
+npm start dev
+ ```
+# Demo Video
+
+https://youtu.be/aH-033t3XJg
+____________________________________________________________________
 
 
 
