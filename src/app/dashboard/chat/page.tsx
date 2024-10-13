@@ -277,7 +277,7 @@
 
 "use client";
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface RelatedProduct {
   message?: string;
@@ -316,10 +316,13 @@ function Chat(): JSX.Element {
         const relatedProduct = data.related_products[0];
         const answer = relatedProduct?.answer || 'No answer';
 
-        setMessages((prev) => [...prev, { user: 'Answer', text: answer }]);
+        setMessages((prev) => [...prev, { user: 'Answer', text: `: ${answer}` }]);
       } catch (error) {
-        // logger.error('Error fetching AI response:', error);
-        setMessages((prev) => [...prev, { user: 'AI', text: 'Sorry, something went wrong.' }]);
+        console.error('Error fetching AI response:', error);
+        setMessages((prev) => [
+          ...prev,
+          { user: 'AI', text: 'Sorry, something went wrong.' },
+        ]);
       } finally {
         setLoading(false);
       }
@@ -333,7 +336,7 @@ function Chat(): JSX.Element {
       </div>
       <div className="chat-messages" style={styles.messages}>
         {messages.map((msg, index) => (
-          <div key={`${msg.text}-${index}`} style={styles.message}>
+          <div key={msg.text + index} style={styles.message}>
             <strong>{msg.user}: </strong>
             {msg.text}
           </div>
@@ -346,7 +349,9 @@ function Chat(): JSX.Element {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={(e) => {
-            if (e.key === 'Enter') handleSend();
+            if (e.key === 'Enter') {
+              handleSend();
+            }
           }}
           style={styles.input}
           placeholder="Type your question..."
