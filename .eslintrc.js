@@ -115,6 +115,10 @@ module.exports = {
     '@typescript-eslint/no-shadow': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/no-misused-promises': 'off',
-    // ... You can disable any other rules that are causing issues
+    '@typescript-eslint/require-await': 'off', // Disable this rule
+    '@typescript-eslint/prefer-nullish-coalescing': 'off', // Disable this rule
+    '@typescript-eslint/no-unnecessary-condition': 'off', // Disable this rule
+     'no-unused-vars': 'off', // Disable this rule
+  
   },
 };

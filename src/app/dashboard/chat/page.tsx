@@ -135,11 +135,9 @@
 // };
 
 // export default Chat;
-"use client"; 
+"use client";
 
-import React from 'react';
-import { useState } from 'react';
-
+import React, { useState } from 'react';
 
 interface RelatedProduct {
     message?: string;
@@ -150,14 +148,14 @@ interface ApiResponse {
     related_products: RelatedProduct[];
 }
 
-function Chat(): JSX.Element {
+export const Chat = (): JSX.Element => {
     const [messages, setMessages] = useState<{ user: string; text: string }[]>([]);
-    const [input, setInput] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [input, setInput] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
 
     const handleSend = async (): Promise<void> => {
         if (input.trim()) {
-            setMessages([...messages, { user: 'You', text: input }]);
+            setMessages((prev) => [...prev, { user: 'You', text: input }]);
             setInput('');
             setLoading(true);
 
@@ -180,7 +178,7 @@ function Chat(): JSX.Element {
 
                 setMessages((prev) => [
                     ...prev,
-                    { user: 'Answer', text: `: ${answer}` },
+                    { user: 'AI', text: answer },
                 ]);
             } catch (error) {
                 console.error('Error fetching AI response:', error);
@@ -201,7 +199,7 @@ function Chat(): JSX.Element {
             </div>
             <div className="chat-messages" style={styles.messages}>
                 {messages.map((msg, index) => (
-                    <div key={msg.text + index} style={styles.message}>
+                    <div key={index} style={styles.message}>
                         <strong>{msg.user}: </strong>
                         {msg.text}
                     </div>
@@ -221,14 +219,14 @@ function Chat(): JSX.Element {
             </div>
         </div>
     );
-}
+};
 
 const styles: Record<string, React.CSSProperties> = {
     container: {
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
-        height: '600px', 
+        height: '600px',
         border: '1px solid #ccc',
         borderRadius: '5px',
         overflow: 'hidden',
@@ -274,4 +272,3 @@ const styles: Record<string, React.CSSProperties> = {
 };
 
 export default Chat;
-
