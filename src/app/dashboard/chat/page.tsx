@@ -277,16 +277,13 @@
 
 "use client";
 
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-// Interface for RelatedProduct with optional message and answer properties
 interface RelatedProduct {
   message?: string;
   answer?: string;
 }
 
-// Interface for API response with related_products array
 interface ApiResponse {
   related_products: RelatedProduct[];
 }
@@ -319,16 +316,10 @@ function Chat(): JSX.Element {
         const relatedProduct = data.related_products[0];
         const answer = relatedProduct?.answer || 'No answer';
 
-        setMessages((prev) => [
-          ...prev,
-          { user: 'Answer', text: `: ${answer}` },
-        ]);
+        setMessages((prev) => [...prev, { user: 'Answer', text: answer }]);
       } catch (error) {
-        console.error('Error fetching AI response:', error);
-        setMessages((prev) => [
-          ...prev,
-          { user: 'AI', text: 'Sorry, something went wrong.' },
-        ]);
+        // logger.error('Error fetching AI response:', error);
+        setMessages((prev) => [...prev, { user: 'AI', text: 'Sorry, something went wrong.' }]);
       } finally {
         setLoading(false);
       }
@@ -342,7 +333,7 @@ function Chat(): JSX.Element {
       </div>
       <div className="chat-messages" style={styles.messages}>
         {messages.map((msg, index) => (
-          <div key={`<span class="math-inline">\{msg\.text\}\-</span>{index}`} style={styles.message}>
+          <div key={`${msg.text}-${index}`} style={styles.message}>
             <strong>{msg.user}: </strong>
             {msg.text}
           </div>
@@ -354,7 +345,9 @@ function Chat(): JSX.Element {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyPress={(e) => (e.key === 'Enter' && handleSend())}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') handleSend();
+          }}
           style={styles.input}
           placeholder="Type your question..."
         />
@@ -407,8 +400,8 @@ const styles: Record<string, React.CSSProperties> = {
     marginRight: '10px',
   },
   sendButton: {
-    padding: '10'
-  }
-  //     },
- };
- export default Chat;
+    padding: '10px',
+  },
+};
+
+export default Chat;
