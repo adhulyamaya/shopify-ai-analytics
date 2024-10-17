@@ -135,8 +135,6 @@
 // };
 
 // export default Chat;
-// src/app/dashboard/chat/page.tsx
-
 "use client";
 
 import React, { useState } from 'react';
@@ -150,7 +148,7 @@ interface ApiResponse {
     related_products: RelatedProduct[];
 }
 
-const Chat = (): JSX.Element => {
+export default function Chat(): JSX.Element {
     const [messages, setMessages] = useState<{ user: string; text: string }[]>([]);
     const [input, setInput] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
@@ -273,4 +271,3 @@ const styles: Record<string, React.CSSProperties> = {
     },
 };
 
-export default Chat;
